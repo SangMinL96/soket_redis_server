@@ -8,8 +8,11 @@
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/node": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
+    "@babel/runtime": "^7.12.5",
     "apollo-server": "^2.19.1",
+    "copy": "^0.3.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "redis": "^3.0.2",
@@ -21,6 +24,8 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "start": "nodemon --exec babel-node build/server.js",
+    "dev": "nodemon --exec babel-node src/server.js",
+    "build": "babel src -d build"
   }
 }

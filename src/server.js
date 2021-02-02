@@ -1,12 +1,12 @@
+import './env';
 import express from "express";
 const app = express();
-const port = 3814;
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const redisAdapter = require("socket.io-redis");
 const redis = require("redis");
-const redisClient = redis.createClient({ host: "193.123.224.133", port: 6379 });
-io.adapter(redisAdapter({ host: "193.123.224.133", port: 6379 }));
+const redisClient = redis.createClient({ host: process.env.REDIS_URL, port: process.env.REDIS_PORT });
+io.adapter(redisAdapter({ host: process.env.REDIS_URL, port: process.env.REDIS_PORT }));
 app.get("/", (req, res, next) => {
   res.send("hello world!");
 });
@@ -34,8 +34,8 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(port, () => {
-  console.log(`localhost:${port}`);
+http.listen(process.env.PORT, () => {
+  console.log(`localhost:${process.env.PORT}`);
 });
 
 // $env:NODE_ENV="dev"; yarn dev
